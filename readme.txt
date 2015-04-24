@@ -38,6 +38,7 @@ Now it's free. But we recommend to check a Terms of Using at http://shopinpic.co
 == Screenshots ==
 1. Result image 
 2. Settings page 
+3. Image mapping management
 
 == Known issues ==
 
