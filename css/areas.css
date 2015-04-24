@@ -164,4 +164,6 @@ ul.sinp_cp li a:hover { opacity: 1; }
 .areamap_popup .copyright { font-size: 10px; text-align: center; margin-top: 10px; }
 .areamap_popup .title { font-size: 20px; font-family:inherit; color: black; }
 .areamap_popup .text { font-size: 15px; font-family: inherit; color: black; }
+.areamap_popup .text img { width: 100%; }
+.areamap_popup .text a { font-size: 15px; font-family: inherit; color: black; border-bottom: 1px solid black; }
 .areamap_popup .copyright a { border-bottom: 1px solid black; }
