@@ -36,7 +36,8 @@ Nope.
 Now it's free. But we recommend to check a Terms of Using at http://shopinpic.com/getapikey/license.php If your site is commercial and it will bring a high load on our servers we will contact you to solve an issue.
 
 == Screenshots ==
-Will upload soon.
+1. Result image screenshot1.png
+2. Settings page screenshot-settings.png
 
 == Known issues ==
 
