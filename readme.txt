@@ -44,9 +44,9 @@ Now it's free. But we recommend to check a Terms of Using at http://shopinpic.co
 Try to avoid putting images with mark up on the one line without wrapping elements.
 
 Internet Explorer < 8 have a limited support:
-* Images with padding left and top could have wrong icons placements
-* Images with absolute positioning will hav a wrong icon placemend
-* Management panel will not work under IE8
+1. Images with padding left and top could have wrong icons placements
+2. Images with absolute positioning will hav a wrong icon placemend
+3. Management panel will not work under IE8
 
 If you got an issue, please write us at support@shopinpic.com 
 
