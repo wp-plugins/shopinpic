@@ -9,8 +9,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Made your images interactive with ShopInPic service. You could map areas of the image with different sizes, icons, text, colors etc. 
 
-Mobile devices and responsive layouts supported as well.
-
 == Description ==
 
 This plugin is a wrapper over the SHOPINPIC.COM web service. Service allow a blog editors mark up a post images with interactive areas. Eeach area is highly customizable to fit your design. Check out a DEMO page at the http://www.shopinpic.com/demo/.
