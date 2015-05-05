@@ -26,6 +26,9 @@ Take a note, plugin will access shopinpic.com servers for imagemapping, store an
 = Will it works in sliding gallery? =
 Who knows. It depends from gallery code. Your could try. 
 
+= How to add a border around area? =
+Please check http://shopinpic.com/getapikey/faq.php
+
 = What about responsive layouts? =
 It's supported, even if you resize browser window by mouse.
 
