@@ -10,7 +10,7 @@ filter: alpha(opacity=0);
 .areamap.show { opacity: 1; filter: alpha(opacity=100); }
 .areamap .areamap_popup {
     position: relative;
-/*     display: none; */
+     display: none; 
     padding: 4px;
      -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -87,7 +87,7 @@ filter: alpha(opacity=0);
 .areamap .visible {
     display: block !important;
 }
-.areamap:hover .areamap_popup { /* display: block; */ opacity: 1; filter: alpha(opacity=100); }
+.areamap:hover .areamap_popup {  display: block; opacity: 1; filter: alpha(opacity=100); }
 .areamap a { text-decoration: none; color: black; }
 .areamap .areamap_title {  text-decoration: underline; margin-bottom: 3px; }
 .areamap .areamap_descr { font-size: 10px; }
