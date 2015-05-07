@@ -21,8 +21,23 @@ Take a note, plugin will access shopinpic.com servers for imagemapping, store an
 3. Go to Settings your WordPress admin panel - "Settings" > "ShopInPic".
 4. Put API key in settings and click "Save"
 5. Check the settings page and write down a correct "ContentId HTML block" value. It's must be a wrapper id over your content, and depends from your theme.
+6. Login as wordpress administrator and create a page with image inside.
+7. Image sizes should be more 200x200px
+8. Open page created at step 6 in preview mode or in public mode and you should see an edit icon over image at the bottom left corner.
 
 == Frequently Asked Questions ==
+= How to place an areas over an image? =
+1. Login as wordpress administrator and create a page with image inside.
+2. Image size should be more 200x200px
+3. Open page created at step 1 in the preview or public mode and you should see an edit icon over image at the bottom left c
+orner.
+
+= I do not see an edit icon over image = 
+1. Make sure image size is more 200x200px
+2. Check a DIV content wrapper id. It depends from theme you are using. If you need support, please write us at support@shopinpic.com 
+
+If images on the page are created dynamically (i.e. by photo gallery) they will not able using shopinpic plugin for now.
+
 = Will it works in sliding gallery? =
 Who knows. It depends from gallery code. Your could try. 
 
