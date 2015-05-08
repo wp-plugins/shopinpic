@@ -22,7 +22,7 @@ Take a note, plugin will access shopinpic.com servers for imagemapping, store an
 4. Put API key in settings and click "Save"
 5. Check the settings page and write down a correct "ContentId HTML block" value. It's must be a wrapper id over your content, and depends from your theme.
 6. Login as wordpress administrator and create a page with image inside.
-7. Image sizes should be more 200x200px
+7. Image sizes should be more 250x250px
 8. Open page created at step 6 in preview mode or in public mode and you should see an edit icon over image at the bottom left corner.
 
 == Frequently Asked Questions ==

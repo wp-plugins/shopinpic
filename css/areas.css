@@ -104,7 +104,7 @@ filter: alpha(opacity=0);
 
 
 .shopinpic_icon {
-    float: right;
+    float: left;
     background: url('../img/24x24_icons.png') no-repeat;
     /* background: url('../img/24x24_red.png') no-repeat; */
     display: inline-block;
@@ -135,6 +135,43 @@ filter: alpha(opacity=0);
 .shopinpic_airplane { background-position: -363px 0px; }
 .shopinpic_nuclear { background-position: -387px 0px; }
 .shopinpic_warning_red { background-position: -411px 0px; }
+
+.shopinpic_warning_yellow { background-position: -435px 0px; }
+.shopinpic_heart { background-position: -459px 0px; }
+.shopinpic_music { background-position: -482px 0px; }
+.shopinpic_sound { background-position: -506px 0px; }
+.shopinpic_play { background-position: -530px 0px; }
+.shopinpic_forward { background-position: -554px 0px; }
+.shopinpic_star11 { background-position: -579px 0px; }
+.shopinpic_star2 { background-position: -602px 0px; }
+.shopinpic_star3 { background-position: -627px 0px; }
+.shopinpic_capA { background-position: -651px 0px; }
+.shopinpic_capB { background-position: -674px 0px; }
+.shopinpic_capC { background-position: -698px 0px; }
+.shopinpic_capD { background-position: -723px 0px; }
+.shopinpic_capE { background-position: -746px 0px; }
+.shopinpic_num1 { background-position: -770px 0px; }
+.shopinpic_num2 { background-position: -794px 0px; }
+.shopinpic_num3 { background-position: -818px 0px; }
+.shopinpic_num4 { background-position: -843px 0px; }
+.shopinpic_num5 { background-position: -866px 0px; }
+.shopinpic_num6 { background-position: -890px 0px; }
+.shopinpic_num7 { background-position: -914px 0px; }
+.shopinpic_num8 { background-position: -938px 0px; }
+.shopinpic_num9 { background-position: -962px 0px; }
+.shopinpic_num0 { background-position: -986px 0px; }
+.shopinpic_shopping { background-position: -1011px 0px; }
+.shopinpic_book { background-position: -1034px 0px; }
+.shopinpic_zoom_black { background-position: -1059px 0px; }
+.shopinpic_zoom_white { background-position: -1082px 0px; }
+.shopinpic_chat_black { background-position: -1106px 0px; }
+.shopinpic_chat_white { background-position: -1130px 0px; }
+.shopinpic_youtube { background-position: -1154px 0px; }
+.shopinpic_instag { background-position: -1178px 0px; }
+.shopinpic_pinter { background-position: -1202px 0px; }
+.shopinpic_twitter { background-position: -1226px 0px; }
+.shopinpic_linkedin { background-position: -1250px 0px; }
+.shopinpic_facebook{ background-position: -1274px 0px; }
 
 .shopinpic_black_1, .shopinpic_black_2, .shopinpic_black_3, .shopinpic_black_4, .shopinpic_black_5
 { background: url('../img/24x24_black.png') no-repeat; }
