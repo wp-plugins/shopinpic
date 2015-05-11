@@ -46,13 +46,28 @@ if (!function_exists('shopinpic_head')) {
 if (!function_exists('shopinpic_footer_script')) {
 	function shopinpic_footer_script() {
 		$apiKey = get_option('shopinpic_apikey');
-		$contentId = get_option('shopinpic_content_id');
+		//$contentId = get_option('shopinpic_content_id');
 		if ($apiKey) {
-			$inlineJs = "<script type='text/javascript'>Shopinpic_extendChildImages('".$contentId."');";
+			$minImgJsStr = "";
+			$minImageWidth = (int)get_option('shopinpic_minImageWidth');
+			if ($minImageWidth) {
+				$minImgJsStr .= "'minImageWidth': ".$minImageWidth.",";
+			}
+			$minImageHeight = (int)get_option('shopinpic_minImageHeight');
+			if ($minImageHeight) {
+				$minImgJsStr .= "'minImageHeight': ".$minImageHeight.",";
+			}
+			$popupPositioning = get_option('shopinpic_positioning');
+			if (!$popupPositioning) {
+				$popupPositioning = 'right';
+			}
+			$inlineJs = "<script type='text/javascript'>";
+			//$inlineJs .= "Shopinpic_extendChildImages('".$contentId."');";
 			$inlineJs .= (current_user_can('edit_post'))?'var isAdmin = true;':'var isAdmin = false;';
 			$inlineJs .= "var sinp = new Shopinpic({
 'apiKey': '".$apiKey."',
-'imgCssName': 'shopinpic',
+'popupPositioning': '".$popupPositioning."',
+".$minImgJsStr."
 'adminMode': isAdmin
 });</script>";
 			echo $inlineJs;
@@ -62,7 +77,10 @@ if (!function_exists('shopinpic_footer_script')) {
 
 function shopinpic_activation() {
 	add_option('shopinpic_apikey', '');
-	add_option('shopinpic_content_id', 'content');
+	//add_option('shopinpic_content_id', 'content'); //No default value
+	add_option('shopinpic_positioning', 'auto');
+	add_option('shopinpic_minImageWidth', 250);
+	add_option('shopinpic_minImageHeight', 250);
 }
 
 function shopinpic_add_options() {
@@ -73,8 +91,9 @@ function shopinpic_add_options() {
 } 
 
 function register_shopinpicsettings() {
-	register_setting( 'shopinpic-settings-group', 'API Key' );
-	register_setting( 'shopinpic-settings-group', 'Theme Content Id' );
+	register_setting( 'shopinpic-settings-group', 'API Key');
+	register_setting( 'shopinpic-settings-group', 'Theme Content Id');
+	register_setting( 'shopinpic-settings-group', 'Popup positioning');
 }
 
 function messageHelper($message, $class = null) {
@@ -88,6 +107,25 @@ function shopinpic_settings_page() {
 	}
 
 	if (isset($_POST['update_options'])) {
+		$validPositioning = array('auto' => 1, 'left' => 1, 'right' => 1);
+		$minImageWidth = (int)$_POST['shopinpic_minImageWidth'];
+		if ($minImageWidth) {
+			update_option('shopinpic_minImageWidth', $minImageWidth);
+		}
+		$minImageHeight = (int)$_POST['shopinpic_minImageHeight'];
+		if ($minImageHeight) {
+			update_option('shopinpic_minImageHeight', $minImageHeight);
+		}
+		if ($minImageWidth && $minImageHeight && ($minImageWidth < 150 || $minImageHeight < 150)) {
+messageHelper('Minimum image width or height must be more 150px due the popup width.', 'error');
+return;
+}
+		$popupPositioning = $_POST['shopinpic_positioning'];
+		if (!isset($validPositioning)) {
+			$popupPositioning = 'auto';
+		}
+		update_option('shopinpic_positioning', $popupPositioning);
+
 		$apiKey = preg_replace("/[^a-zA-Z0-9]+/", "", $_POST['shopinpic_apikey']);
 		$jsonContents = file_get_contents('http://shopinpic.com/imgMap3/getDatas.php?imageUrl=sample&apiKey='.$apiKey);
 		$res = json_decode($jsonContents);
@@ -100,7 +138,7 @@ function shopinpic_settings_page() {
 
 		
                 update_option('shopinpic_apikey', $apiKey);
-                update_option('shopinpic_content_id', trim(str_replace(array("'", "`"), "", $_POST['shopinpic_content_id'])));
+                //update_option('shopinpic_content_id', trim(str_replace(array("'", "`"), "", $_POST['shopinpic_content_id'])));
 		messageHelper('API key is valid. Settings are saved. <br /><br />Refer USAGE section for further steps at <a target="_blank" href="http://shopinpic.com/getapikey/wp.php">http://shopinpic.com/getapikey/wp.php</a>');
 		return;
 	}
@@ -108,6 +146,7 @@ function shopinpic_settings_page() {
 	<h2>ShopInPic settings</h2>
 	<style>
 	#sinp_form label { float:left; width: 200px;  }
+	#sinp_form label .hint { display:block;font-size: 10px;  }
 	#sinp_form #apiKey { width: 300px;  }
 	#sinp_form input#selector { width: 150px;  }
 	</style>
@@ -116,15 +155,38 @@ To get an API key go to the <a href="http://shopinpic.com/getapikey" target="_bl
 <hr />
 	<form id='sinp_form' method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<div>
-	<label>API key*: </label>
-	<input type='text' id='apiKey' name='shopinpic_apikey' value='<?php echo get_option('shopinpic_apikey'); ?>' />
+		<label>API key*: </label>
+		<input type='text' id='apiKey' name='shopinpic_apikey' value='<?php echo get_option('shopinpic_apikey'); ?>' />
+		<div style='clear:both;'></div>
+	</div>
+	<? /* removed temprorally, not all users understood that
+	<div>
+		<label>ContentId HTML block</label>
+		<input type='text' id='selector' name='shopinpic_content_id' value='<?php echo get_option('shopinpic_content_id'); ?>' />
+		<div style='clear:both;'></div>
+	</div>
+	*/ ?>
+	<div>
+		<label>Popup positioning</label>
+		<select name='shopinpic_positioning'>
+			<option value="auto" <?php echo get_option('shopinpic_positioning') == 'auto'?'selected=selected':''?> >auto</option>
+			<option value="left" <?php echo get_option('shopinpic_positioning') == 'left'?'selected=selected':''?> > left</option>
+			<option value="right" <?php echo get_option('shopinpic_positioning') == 'right'?'selected=selected':''?> >right</option>
+		</select>
+		<div style='clear:both;'></div>
 	</div>
 	<div>
-	<label>ContentId HTML block</label>
-	<input type='text' id='selector' name='shopinpic_content_id' value='<?php echo get_option('shopinpic_content_id'); ?>' />
+		<label>Minimum image width <span class='hint'>(in pixels, not less 150)</span></label>
+		<input type='text' name='shopinpic_minImageWidth' value='<?php echo get_option('shopinpic_minImageWidth')?get_option('shopinpic_minImageWidth'):250; ?>' />
+		<div style='clear:both;'></div>
 	</div>
 	<div>
-	<input type="submit" class="button-primary" name="update_options" value="Update" />
+		<label>Minimum image height <span class='hint'>(in pixels, not less 150)</span></label>
+		<input type='text' name='shopinpic_minImageHeight' value='<?php echo get_option('shopinpic_minImageHeight')?get_option('shopinpic_minImageHeight'):250; ?>' />
+		<div style='clear:both;'></div>
+	</div>
+	<div>
+		<input type="submit" class="button-primary" name="update_options" value="Update" />
 	</div>
 	</form> 
 	<?
