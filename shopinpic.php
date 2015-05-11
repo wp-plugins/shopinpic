@@ -3,7 +3,7 @@
  * Plugin Name: ShopInPic 
  * Plugin URI: http://shopinpic.com/getapikey/wp.php
  * Description: Tool to make you image interactive
- * Version: 1.0.1
+ * Version: 1.3
  * Author: Abrikos Digital 
  * Author URI: http://abdigital.ru
  * License: GPL2
