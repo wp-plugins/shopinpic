@@ -3,7 +3,7 @@
  * Plugin Name: ShopInPic 
  * Plugin URI: http://shopinpic.com/getapikey/wp.php
  * Description: Tool to make you image interactive
- * Version: 1.3
+ * Version: 1.3.1
  * Author: Abrikos Digital 
  * Author URI: http://abdigital.ru
  * License: GPL2
@@ -68,7 +68,8 @@ if (!function_exists('shopinpic_footer_script')) {
 'apiKey': '".$apiKey."',
 'popupPositioning': '".$popupPositioning."',
 ".$minImgJsStr."
-'adminMode': isAdmin
+'adminMode': isAdmin,
+'visibleAnimation': true
 });</script>";
 			echo $inlineJs;
 		}
