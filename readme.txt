@@ -1,9 +1,9 @@
 === ShopInPic Plugin ===
 Contributors: Abrikos Digital 
-Tags: image, tag, image tagging, image tags, featured image, featured images, art gallery, foto, photo, interactive image, interactive photo, interactive picture, imagemap, image map, marketing
+Tags: image, tag, image tagging, image tags, featured image, featured images, art gallery, foto, photo, interactive image, interactive photo, interactive picture, imagemap, image map, marketing, native ads, native ad
 Requires at least: 3.0.1
 Tested up to: 4.2
-Stable tag: 1.3
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,9 +11,11 @@ Made your images interactive with ShopInPic service. You could map areas of the 
 
 == Description ==
 
-This plugin is a wrapper over the SHOPINPIC.COM web service. Service allow a blog editors mark up a post images with interactive areas. Eeach area is highly customizable to fit your design. Check out a DEMO page at the http://www.shopinpic.com/demo/.
+This plugin is a wrapper over the SHOPINPIC.COM web service. Service allow a blog editors mark up a post images with interactive areas. Eeach area is highly customizable to fit your design. Check out a DEMO page at the http://www.shopinpic.com/demo/. Your content will be understand better or you can you it in "native advertizing" approach.
 
 Take a note, plugin will access shopinpic.com servers for imagemapping, store and retrieve data. To use a plugin you will need an API key, which your can get easily at http://shopinpic.com/getapikey/
+
+Whitelabel using of the service is not free of charge. 
 
 == Installation ==
 1. Upload the folder shopinpic to the directory /wp-content/plugins/.
@@ -71,12 +73,17 @@ If you got an issue, please write us at support@shopinpic.com
 
 
 == Changelog ==
+= 1.3.1 =
+* FEATURE icons animation where scrolling to the images
+* FEATURE icons startup animation
+* FEATURE statistics initial module
+
 = 1.3 =
 * FEATURE https support
 * BUGFIX relative positioned images for some wordpress themes
 * FEATURE option "open by default" for any icon description
 * BUGFIX description fadein animation now works
-* BUGFIX more suppor IE8 browser
+* BUGFIX more support for IE8 browser
 
 = 1.2 =
 * BUGFIX removed dependency from parent container id
