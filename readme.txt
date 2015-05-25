@@ -1,6 +1,6 @@
 === ShopInPic Plugin ===
 Contributors: Abrikos Digital 
-Tags: image, tag, image tagging, image tags, featured image, featured images, art gallery, foto, photo, interactive image, interactive photo, interactive picture, imagemap, image map, marketing, native ads, native ad
+Tags: image, tag, image tagging, image tags, featured image, featured images, art gallery, foto, photo, interactive image, interactive photo, interactive picture, imagemap, image map, marketing, native ads, native ad, woocommerce integration
 Requires at least: 3.0.1
 Tested up to: 4.2
 Stable tag: 1.3.1
@@ -11,11 +11,13 @@ Made your images interactive with ShopInPic service. You could map areas of the 
 
 == Description ==
 
-This plugin is a wrapper over the SHOPINPIC.COM web service. Service allow a blog editors mark up a post images with interactive areas. Eeach area is highly customizable to fit your design. Check out a DEMO page at the http://www.shopinpic.com/demo/. Your content will be understand better or you can you it in "native advertizing" approach.
+This plugin is a wrapper over the SHOPINPIC.COM web service. Service allow a blog editors mark up a post images with interactive areas. Eeach area is highly customizable to fit your design. Check out a DEMO page at the http://www.shopinpic.com/demo/. Your content will be understand better or you can you it in "native advertizing" approach. Service support WooCommerce plugin integration to fill popup data in one click.
 
-Take a note, plugin will access shopinpic.com servers for imagemapping, store and retrieve data. To use a plugin you will need an API key, which your can get easily at http://shopinpic.com/getapikey/
+Take a note, plugin will access shopinpic.com servers for image mapping, store and retrieve data. To use a plugin you will need an API key, which your can get easily at http://shopinpic.com/getapikey/
 
-Whitelabel using of the service is not free of charge. 
+Service is not free of charge in cases:
+1. Your site requires more 1 000 pageviews daily.
+2. You want to hide ShopInPic branding and use services as "whitelabel".
 
 == Installation ==
 1. Upload the folder shopinpic to the directory /wp-content/plugins/.
@@ -31,8 +33,7 @@ Whitelabel using of the service is not free of charge.
 = How to place an areas over an image? =
 1. Login as wordpress administrator and create a page with image inside.
 2. Image size should be more 200x200px
-3. Open page created at step 1 in the preview or public mode and you should see an edit icon over image at the bottom left c
-orner.
+3. Open page created at step 1 in the preview or public mode and you should see an edit icon over image at the bottom left corner.
 
 = I do not see an edit icon over image = 
 1. Make sure image size is more 200x200px
@@ -73,6 +74,8 @@ If you got an issue, please write us at support@shopinpic.com
 
 
 == Changelog ==
+= 1.3.2 =
+* FEATURE WooCommerce plugin integration. Check more at http://shopinpic.com/woocommerce/
 = 1.3.1 =
 * FEATURE icons animation where scrolling to the images
 * FEATURE icons startup animation
