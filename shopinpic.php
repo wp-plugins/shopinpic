@@ -3,13 +3,13 @@
  * Plugin Name: ShopInPic 
  * Plugin URI: http://shopinpic.com/getapikey/wp.php
  * Description: Tool to make you image interactive
- * Version: 1.3
+ * Version: 1.3.2
  * Author: Abrikos Digital 
  * Author URI: http://abdigital.ru
  * License: GPL2
  */
 
-/*  Copyright YEAR  PLUGIN_AUTHOR_NAME  (email : PLUGIN AUTHOR EMAIL)
+/*  Copyright 2015 Abrikos Digital (email: support@shopinpic.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -25,10 +25,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
-
 defined('ABSPATH') or die('No script kiddies please!');
-
 
 if (!function_exists('shopinpic_head')) {
 	function shopinpic_head() {
@@ -62,13 +59,17 @@ if (!function_exists('shopinpic_footer_script')) {
 				$popupPositioning = 'right';
 			}
 			$inlineJs = "<script type='text/javascript'>";
+			$adminPayload = '';
+
 			//$inlineJs .= "Shopinpic_extendChildImages('".$contentId."');";
 			$inlineJs .= (current_user_can('edit_post'))?'var isAdmin = true;':'var isAdmin = false;';
 			$inlineJs .= "var sinp = new Shopinpic({
 'apiKey': '".$apiKey."',
 'popupPositioning': '".$popupPositioning."',
 ".$minImgJsStr."
-'adminMode': isAdmin
+'adminMode': isAdmin,
+'adminPayload': '".$adminPayload."',
+'visibleAnimation': true
 });</script>";
 			echo $inlineJs;
 		}
@@ -106,6 +107,24 @@ function shopinpic_settings_page() {
 		return;
 	}
 
+	$isWooIntegrated = NULL;
+	if (isset($_POST['check_woo'])) {
+		$wooSiteUrl = '';
+		//{{{ 
+		$jsonContents = file_get_contents('http://shopinpic.com/imgMap3/checkWooData.php?apiKey='.get_option('shopinpic_apikey'));
+		$res = json_decode($jsonContents);
+		$isWooIntegrated = FALSE;	
+		if ($res) { 
+			if ($res->error) {
+				$isWooIntegrated = FALSE;	
+			} else {
+				$isWooIntegrated = TRUE;	
+				$wooSiteUrl = $res->data->woo_url;
+			}
+		}
+	}
+	//}}}
+
 	if (isset($_POST['update_options'])) {
 		$validPositioning = array('auto' => 1, 'left' => 1, 'right' => 1);
 		$minImageWidth = (int)$_POST['shopinpic_minImageWidth'];
@@ -135,9 +154,9 @@ return;
 		return;
 
 		}
-
 		
                 update_option('shopinpic_apikey', $apiKey);
+
                 //update_option('shopinpic_content_id', trim(str_replace(array("'", "`"), "", $_POST['shopinpic_content_id'])));
 		messageHelper('API key is valid. Settings are saved. <br /><br />Refer USAGE section for further steps at <a target="_blank" href="http://shopinpic.com/getapikey/wp.php">http://shopinpic.com/getapikey/wp.php</a>');
 		return;
@@ -159,7 +178,7 @@ To get an API key go to the <a href="http://shopinpic.com/getapikey" target="_bl
 		<input type='text' id='apiKey' name='shopinpic_apikey' value='<?php echo get_option('shopinpic_apikey'); ?>' />
 		<div style='clear:both;'></div>
 	</div>
-	<? /* removed temprorally, not all users understood that
+	<?php /* removed temprorally, not all users understood that
 	<div>
 		<label>ContentId HTML block</label>
 		<input type='text' id='selector' name='shopinpic_content_id' value='<?php echo get_option('shopinpic_content_id'); ?>' />
@@ -185,11 +204,30 @@ To get an API key go to the <a href="http://shopinpic.com/getapikey" target="_bl
 		<input type='text' name='shopinpic_minImageHeight' value='<?php echo get_option('shopinpic_minImageHeight')?get_option('shopinpic_minImageHeight'):250; ?>' />
 		<div style='clear:both;'></div>
 	</div>
+<br />
 	<div>
 		<input type="submit" class="button-primary" name="update_options" value="Update" />
 	</div>
+
 	</form> 
-	<?
+	<form method="POST">
+		<h2>WooCommerce integration</h2>
+		<p>You could integrate ShopInPic mapping software with WooCommerce plugin to fill up popup details quickly, just by entering SKU or product Id. To learn more please read <a href="//shopinpic.com/woocommerce/" target="_blank">manual</a>.</p>
+		<p>
+			<a class='button' href='//shopinpic.com/getapikey/wooSettings.php?woo_url=<?php echo get_site_url();?>' target="_blank">Start</a> integration</p>
+			<input type='hidden' name='check_woo' value='1' />
+			<?php if ($isWooIntegrated === NULL) : ?>
+				<p>If you are already integrated you can <input class='button' type='submit' value='check' /> integration.</p>
+			<?php endif; ?>
+			<?php if ($isWooIntegrated === TRUE) : ?>
+				<h4>You successfully integrated with wooCommerce [<?php echo $wooSiteUrl?>] url!</h4>
+			<?php endif; ?>
+			<?php if ($isWooIntegrated === FALSE) : ?>
+				<h4 style='color: red;'>Integration fail. Please check credentials <a href='//shopinpic.com/getapikey/wooSettings.php?woo_url=<?php echo get_site_url();?>' target="_blank">here</a></h4>
+			<?php endif; ?>
+		<p>
+	</form>
+	<?php
 }
 
 function shopinpic_plugin_action_links($links, $file) {
@@ -211,6 +249,5 @@ add_action( 'wp_enqueue_scripts', 'shopinpic_head');
 add_action( 'wp_footer', 'shopinpic_footer_script' );
 register_activation_hook( __FILE__, 'shopinpic_activation' );
 add_action('admin_menu', 'shopinpic_add_options');
-
 add_filter('plugin_action_links', 'shopinpic_plugin_action_links', 10, 2);
-        
+
